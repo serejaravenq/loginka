@@ -9,7 +9,7 @@ $email = $_POST["email"];
 $pass = $_POST["password"];
 
 // mysql connection
-$db = new mysqli("localhost", "root", "");
+$db = new mysqli("localhost", "root", "ilovephp1");
 $db->select_db("vapeshop");
 
 /* check connection */
@@ -18,16 +18,15 @@ if (mysqli_connect_errno()) {
     exit();
 }
 
-$result = $db->query("SELECT * FROM admins");
+$result = $db->query("SELECT * FROM admins WHERE email = '$email' && password = '$pass'");
 
 $db->close();
 
 $row = $result->fetch_assoc();
 
-if (($row['email'] == $email) && ($row['password'] == $pass)) {
-	echo "Вы авторизовались \n";
-	var_dump($row);
-	 //setcookie('username', $user, time()+3600);
+if ( $row ) {
+	echo "Привет, " . $row["email"];
+	//setcookie('username', $user, time()+3600);
 } else {
 	echo "не правильно введены данные";
 }
