@@ -9,7 +9,7 @@ $email = $_POST["email"];
 $pass = $_POST["password"];
 
 // mysql connection
-$db = new mysqli("localhost", "root", "ilovephp1");
+$db = new mysqli("localhost", "root", "");
 $db->select_db("vapeshop");
 
 /* check connection */
@@ -26,8 +26,9 @@ $row = $result->fetch_assoc();
 
 if ( $row ) {
 	echo "Привет, " . $row["email"];
-	//setcookie('username', $user, time()+3600);
+	setcookie('email', $row["email"], time()+3600);
 } else {
 	echo "не правильно введены данные";
 }
+
 ?>
