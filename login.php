@@ -26,7 +26,7 @@ $row = $result->fetch_assoc();
 
 if ( $row ) {
 	echo "Привет, " . $row["email"];
-	setcookie('email', $row["email"], time()+3600);
+	setcookie('session_id', md5($row["email"]), time()+3600);
 } else {
 	echo "не правильно введены данные";
 }
