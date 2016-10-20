@@ -24,14 +24,7 @@ $path="upload/";
 
 	if(!is_dir($path)){
 		mkdir($path, 0777,true);
-	}elseif(is_dir($path)){
-		
-	}else{
-		echo " не удалось создать директорию";
-	}
-
-   // Проверяем загружен ли файл
-   if(is_uploaded_file($_FILES["filename"]["tmp_name"])){
+		 if(is_uploaded_file($_FILES["filename"]["tmp_name"])){
      // Если файл загружен успешно, перемещаем его
      // из временной директории в конечную
    	
@@ -41,6 +34,23 @@ $path="upload/";
    }else{
    	echo "Ошибка загрузки файла";
    }
+	}elseif(is_dir($path)){
+		 if(is_uploaded_file($_FILES["filename"]["tmp_name"])){
+     // Если файл загружен успешно, перемещаем его
+     // из временной директории в конечную
+   	
+   	
+     move_uploaded_file($_FILES["filename"]["tmp_name"], $path.$_FILES["filename"]["name"]);
+     echo "Файл успешно загружен";
+   }else{
+   	echo "Ошибка загрузки файла";
+   }
+	}else{
+		echo " не удалось создать директорию";
+	}
+
+   // Проверяем загружен ли файл
+  
    
   //подключаемся к бд
    $db = new mysqli("localhost","root","");
