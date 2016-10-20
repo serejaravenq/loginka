@@ -20,17 +20,26 @@
 	exit;
 }
 
+$path="upload/";
+
+	if(!is_dir($path)){
+		mkdir($path, 0777,true);
+	}elseif(is_dir($path)){
+		
+	}else{
+		echo " не удалось создать директорию";
+	}
 
    // Проверяем загружен ли файл
    if(is_uploaded_file($_FILES["filename"]["tmp_name"])){
      // Если файл загружен успешно, перемещаем его
      // из временной директории в конечную
-   	$path="/wamp/tmp/";
-     move_uploaded_file($_FILES["filename"]["tmp_name"], $path.$_FILES["filename"]["name"]);//указал конечную директорию точно такую же , что и временную т.е. /wamp/tmp/image.png ,спросить так можно?
+   	
+   	
+     move_uploaded_file($_FILES["filename"]["tmp_name"], $path.$_FILES["filename"]["name"]);
      echo "Файл успешно загружен";
-
-   } else {
-      echo "Ошибка загрузки файла";
+   }else{
+   	echo "Ошибка загрузки файла";
    }
    
   //подключаемся к бд
@@ -45,6 +54,19 @@
 	$thumbnail = $db->real_escape_string($_FILES["filename"]["name"]);
 	
 	$sql=$db->query("INSERT INTO products(name,price,thumbnail) 
-							VALUES('$name','$price','$path$thumbnail')");
+							VALUES('$name','$price','$thumbnail')");
+	$result = $db->query("SELECT thumbnail FROM products WHERE thumbnail ='$thumbnail' ");
 	$db->close();
+	$row= $result->fetch_assoc();
+	
 ?>
+<!DOCTYPE html>
+
+<html >
+	<head></head>
+<body>
+	<div>
+		<img src="<?php echo $path.$row["thumbnail"];?>">
+	</div>
+</body>
+	</html>
