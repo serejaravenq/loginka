@@ -45,6 +45,6 @@
 	$thumbnail = $db->real_escape_string($_FILES["filename"]["name"]);
 	
 	$sql=$db->query("INSERT INTO products(name,price,thumbnail) 
-							VALUES('$name','$price','$thumbnail')");
+							VALUES('$name','$price','$path$thumbnail')");
 	$db->close();
 ?>
