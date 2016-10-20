@@ -3,7 +3,7 @@
 if ( isset ($_COOKIE["session_id"]) ) {
 	$session_id = $_COOKIE["session_id"];
 
-	$db = new mysqli("localhost", "root", "ilovephp1");
+	$db = new mysqli("localhost", "root", "");
 	$db->select_db("vapeshop");
 
 	/* check connection */
