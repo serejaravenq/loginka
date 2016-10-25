@@ -19,13 +19,13 @@ $db = new mysqli("localhost","root","");
   echo "Имя: ".$row['name']."<br>
   	 Цена: ".$row['price'] ."<br>
   	 Фото:<br> <img style='max-height:225px' src=".$path.$row['thumbnail']."><br>
-  	 <a href='products/".$row['id']."'>Подробнее о картинке:</a><hr>";
+  	 <a href='product.php?id=".$row['id']."'>Подробнее о картинке:</a><hr>";
 
     
 }
 
 
 $db->close();
-	
+	var_dump ($_GET);
 ?>
 </html>
