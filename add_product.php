@@ -1,55 +1,55 @@
 <?php
 	$name= $_POST["name"];
 	$price=$_POST["price"];
-	
+	$path="upload/";
 	// Смотрим что к нам пришло с формы
 // и проверяем
+
 	if(empty($name) || empty($price)){
-		echo "Имя или цена не указаны";
+		print "Имя или
+		цена не указаны";
 		exit;
 	}
+	
 
-   if(!empty($_FILES["filename"]["name"])){
-   if($_FILES["filename"]["size"] > 1024*2*1024)
+if(!empty($_FILES['filename']['name'])){
+	if($_FILES["filename"]["size"] > 1024*2*1024)
    {
-     echo ("Размер файла превышает два мегабайта");
+     print "Размер файла превышает два мегабайта";
      exit;
    }
+	$tmp_name = $_FILES['filename']['tmp_name'];
+	$getimagesize = getimagesize($tmp_name);
+	
+	$mime_type= $getimagesize['mime'];
+	$wh_mime = array('image/gif',
+					'image/jpeg',
+					'image/png');
+	if(!in_array($mime_type,$wh_mime)){
+		print" Неверный формат изображения! Доступные для загрузки форматы: *.gif *.jpg *.png";
+
+	}else{
+		if($mime_type == 'image/gif'){
+			$expansion='.gif';
+		}elseif($mime_type=='image/jpeg'){
+			$expansion ='.jpg';
+		}elseif($mime_type=='image/png'){
+			$expansion='.png';
+	}else{
+		$expansion ='';}
+	}if($expansion !=''){
+		$upload_patch =$path.$_FILES['filename']['name'];
+		}
+		// Проверяем загружен ли файл
+		if(is_uploaded_file($tmp_name)){
+		move_uploaded_file($tmp_name, $upload_patch);
+	}
 }else{
-	echo "Файл пуст";
+	print "Файл пуст";
 	exit;
 }
 
-$path="upload/";
-
-	if(!is_dir($path)){
-		mkdir($path, 0777,true);
-		 if(is_uploaded_file($_FILES["filename"]["tmp_name"])){
-     // Если файл загружен успешно, перемещаем его
-     // из временной директории в конечную
-   	
-   	
-     move_uploaded_file($_FILES["filename"]["tmp_name"], $path.$_FILES["filename"]["name"]);
-     echo "Файл успешно загружен";
-   }else{
-   	echo "Ошибка загрузки файла";
-   }
-	}elseif(is_dir($path)){
-		 if(is_uploaded_file($_FILES["filename"]["tmp_name"])){
-     // Если файл загружен успешно, перемещаем его
-     // из временной директории в конечную
-   	
-   	
-     move_uploaded_file($_FILES["filename"]["tmp_name"], $path.$_FILES["filename"]["name"]);
-     echo "Файл успешно загружен";
-   }else{
-   	echo "Ошибка загрузки файла";
-   }
-	}else{
-		echo " не удалось создать директорию";
-	}
-
-   // Проверяем загружен ли файл
+   
   
    
   //подключаемся к бд
@@ -69,6 +69,7 @@ $path="upload/";
 	$db->close();
 	$row= $result->fetch_assoc();
 	
+
 ?>
 <!DOCTYPE html>
 
@@ -77,6 +78,9 @@ $path="upload/";
 <body>
 	<div>
 		<img src="<?php echo $path.$row["thumbnail"];?>">
+
 	</div>
 </body>
 	</html>
+	
+	
