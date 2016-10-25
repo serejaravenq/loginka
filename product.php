@@ -11,7 +11,7 @@
 	$result = $db->query("SELECT * FROM products WHERE id=$id");
 	$row = $result->fetch_assoc();
 	$db->close();
-	var_dump ($row);
+	
  }
  ?>
  <!DOCTYPE html>
@@ -20,7 +20,11 @@
 	<head></head>
 <body>
 	<div>
+	<p>Имя покупателя: <?php echo $row['name'];?></p>
+	<p>Цена товара: <?php echo $row['price'];?></p>
+	<hr>
 		<img src="<?php echo $path.$row["thumbnail"];?>">
+	}
 
 	</div>
 </body>
