@@ -1,7 +1,7 @@
 <!Doctype html>
 <html>
 <?php
-//include "products/routing.inc.php";
+
 $path="upload/";
 $db = new mysqli("localhost","root","");
    $db->select_db("vapeshop");
@@ -19,13 +19,14 @@ $db = new mysqli("localhost","root","");
   echo "Имя: ".$row['name']."<br>
   	 Цена: ".$row['price'] ."<br>
   	 Фото:<br> <img style='max-height:225px' src=".$path.$row['thumbnail']."><br>
-  	 <a href='product.php?id=".$row['id']."'>Подробнее о картинке:</a><hr>";
+  	 <a href='product.php?id=".$row['id']."'>Подробнее о картинке:</a><br>
+  	   	 <a href='edit_product.php?id=".$row['id']."'>Редактировать продукт:</a><hr>";
 
     
 }
 
 
 $db->close();
-	var_dump ($_GET);
+	
 ?>
 </html>

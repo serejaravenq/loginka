@@ -24,7 +24,7 @@
 	<p>Цена товара: <?php echo $row['price'];?></p>
 	<hr>
 		<img src="<?php echo $path.$row["thumbnail"];?>">
-	}
+	
 
 	</div>
 </body>
