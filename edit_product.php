@@ -49,14 +49,14 @@ if(isset($_GET['id'])){
             }
         
         } 
-  /////////////////////////////////////////////      
+        
         if(!empty($_FILES['filename']['name'])){ //Проверяем что передает нам input type=file
 
                 if($_FILES["filename"]["size"] > 1024*2*1024) {
                         print "Размер файла превышает два мегабайта";
                         exit;
                 }
-
+/////////////////////////////////////////////
         $tmp_name = $_FILES['filename']['tmp_name'];
         $getimagesize = getimagesize($tmp_name);// Проверяем его на тип файла, засовываем в getimagesize
         
@@ -89,26 +89,27 @@ if(isset($_GET['id'])){
         $upload_patch =$path.$_FILES['filename']['name'];
 
         }
+////////////////////////////////////////
         // Проверяем загружен ли файл
         if(is_uploaded_file($tmp_name)) {
             move_uploaded_file($tmp_name, $upload_patch);//перемещам файл в место, куда указываем переменной $upload_patch
 
         }
          $thumbnail = $db->real_escape_string($_FILES["filename"]["name"]);//Экранируем запрос
-        }
-////////////////////////////////////////
-       
-        if(isset($thumbnail)){
-            
-                if($thumbnail != $row['thumbnail'] && $thumbnail !=''){
-                    $result = $db->query("UPDATE products SET 
-                                thumbnail = '$thumbnail'
-                                WHERE id = '$id'");// отправляем запрос на обновление к бд
+
+                if($thumbnail != $row['thumbnail'] ){
+                            $result = $db->query("UPDATE products SET 
+                                        thumbnail = '$thumbnail'
+                                        WHERE id = '$id'");// отправляем запрос на обновление к бд
                 $result = $db->query("SELECT * FROM products where id = '$id'"); //отправляем запрос к бд , Ищем строку которая соответсвует моей переменной
                 $row = $result->fetch_assoc();   
 
-                    }
-    }
+                }
+
+        }
+
+       
+        
 
     $db->close();// закрыли базу//  
 
