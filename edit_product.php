@@ -109,8 +109,6 @@ if(isset($_GET['id'])){
         }
 
        
-        
-
     $db->close();// закрыли базу//  
 
 }// Вышли из условия isset($_GET('id'))
@@ -124,11 +122,12 @@ if(isset($_GET['id'])){
 
 ?>
 <html>
+<head></head>
 <body>
         <form  method="post" enctype="multipart/form-data">
-        Имя:<input type="text" name="name"   size="5" value = "<?php echo $row['name'];?>"><br>
-        Цена:<input type="text" name="price" size="3"  value = "<?php echo $row['price'];?>"><br>
-        <div>Thumbnail: <input type="file"  name="filename" accept="image/*" ><br>    <img style='max-height:225px; margin: 5px 0;' src="<?php echo $path.$row['thumbnail']?>"  ><!-- Картинка берется из папки upload--></div>
+        Имя:<input type="text" name="name"   size="5" value = "<?php print $row['name'];?>"><br>
+        Цена:<input type="text" name="price" size="3"  value = "<?php print $row['price'];?>"><br>
+        <div>Thumbnail: <input type="file"  name="filename" accept="image/*" ><br>    <img style='max-height:225px; margin: 5px 0;' src="<?php print $path.$row['thumbnail']?>"  ><!-- Картинка берется из папки upload--></div>
         <input type="submit" value="Сохранить изменения">  
         </form>
         <hr>
