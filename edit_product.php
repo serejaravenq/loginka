@@ -94,20 +94,21 @@ if(isset($_GET['id'])){
             move_uploaded_file($tmp_name, $upload_patch);//перемещам файл в место, куда указываем переменной $upload_patch
 
         }
-
+         $thumbnail = $db->real_escape_string($_FILES["filename"]["name"]);//Экранируем запрос
         }
 ////////////////////////////////////////
-        $thumbnail = $db->real_escape_string($_FILES["filename"]["name"]);//Экранируем запрос
-
-       if($thumbnail != $row['thumbnail'] && $thumbnail !=''){                   
+       
+        if(isset($thumbnail)){
+            
+                if($thumbnail != $row['thumbnail'] && $thumbnail !=''){
                     $result = $db->query("UPDATE products SET 
-                                
                                 thumbnail = '$thumbnail'
                                 WHERE id = '$id'");// отправляем запрос на обновление к бд
-        $result = $db->query("SELECT * FROM products where id = '$id'"); //отправляем запрос к бд , Ищем строку которая соответсвует моей переменной
-        $row = $result->fetch_assoc();   
+                $result = $db->query("SELECT * FROM products where id = '$id'"); //отправляем запрос к бд , Ищем строку которая соответсвует моей переменной
+                $row = $result->fetch_assoc();   
 
-        }
+                    }
+    }
 
     $db->close();// закрыли базу//  
 
