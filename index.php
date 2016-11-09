@@ -18,7 +18,9 @@ if ( isset ($_COOKIE["session_id"]) ) {
 	$row = $result->fetch_assoc();
 
 	if ( $row ) {
-		echo "вы авторизованы , как " . $row["email"];
+		echo "вы авторизованы , как " . $row["email"]."<br>
+		<a href='new_product'>Добавить товар</a><br>
+		<a href='products.php'>Перейти к списку товаров</a>";
 	} else {
 		header('Location: form.html');
 	}

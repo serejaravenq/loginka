@@ -20,7 +20,9 @@ $db = new mysqli("localhost","root","");
   	 Цена: ".$row['price'] ."<br>
   	 Фото:<br> <img style='max-height:225px' src=".$path.$row['thumbnail']."><br>
   	 <a href='product.php?id=".$row['id']."'>Подробнее о картинке:</a><br>
-  	   	 <a href='edit_product.php?id=".$row['id']."'>Редактировать продукт:</a><hr>";
+  	   	 <a href='edit_product.php?id=".$row['id']."'>Редактировать продукт:</a><br>
+  	   	 <a href='delete_product.php?id=".$row['id']."'>Удалить</a><hr>";
+  	   	 
 
     
 }

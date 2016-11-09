@@ -25,7 +25,9 @@ $db->close();
 $row = $result->fetch_assoc();
 
 if ( $row ) {
-	echo "Привет, " . $row["email"];
+	echo "Привет, " . $row["email"]."<br>
+		<a href='new_product'>Добавить товар</a><br>
+		<a href='products.php'>Перейти к списку товаров</a>";
 	setcookie('session_id', md5($row["email"]), time()+3600);
 } else {
 	echo "не правильно введены данные";

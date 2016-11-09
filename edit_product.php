@@ -27,8 +27,9 @@ if(isset($_GET['id'])){
                                 name = '$name'
                                 WHERE id = '$id'
                                 ");
-        $result = $db->query("SELECT * FROM products where id = '$id'"); //внутри конструкции отправляем запрос к бд 
-        $row = $result->fetch_assoc();
+
+            $result = $db->query("SELECT * FROM products where id = '$id'"); //внутри конструкции отправляем запрос к бд 
+            $row = $result->fetch_assoc();
 
             }
         
@@ -43,8 +44,9 @@ if(isset($_GET['id'])){
                                 price = '$price'
                                 WHERE id = '$id'
                                 ");
-        $result = $db->query("SELECT * FROM products where id = '$id'"); //внутри конструкции отправляем запрос к бд 
-        $row = $result->fetch_assoc(); 
+
+            $result = $db->query("SELECT * FROM products where id = '$id'"); //внутри конструкции отправляем запрос к бд 
+            $row = $result->fetch_assoc(); 
                 
             }
         
@@ -99,8 +101,10 @@ if(isset($_GET['id'])){
 
                 if($thumbnail != $row['thumbnail'] ){
                             $result = $db->query("UPDATE products SET 
+
                                         thumbnail = '$thumbnail'
                                         WHERE id = '$id'");// отправляем запрос на обновление к бд
+
                 $result = $db->query("SELECT * FROM products where id = '$id'"); //отправляем запрос к бд , Ищем строку которая соответсвует моей переменной
                 $row = $result->fetch_assoc();   
 
@@ -125,11 +129,12 @@ if(isset($_GET['id'])){
 <head></head>
 <body>
         <form  method="post" enctype="multipart/form-data">
-        Имя:<input type="text" name="name"   size="5" value = "<?php print $row['name'];?>"><br>
+        Имя:<input type="text" name="name"   size="8" value = "<?php print $row['name'];?>"><br>
         Цена:<input type="text" name="price" size="3"  value = "<?php print $row['price'];?>"><br>
         <div>Thumbnail: <input type="file"  name="filename" accept="image/*" ><br>    <img style='max-height:225px; margin: 5px 0;' src="<?php print $path.$row['thumbnail']?>"  ><!-- Картинка берется из папки upload--></div>
-        <input type="submit" value="Сохранить изменения">  
-        </form>
+        <input type="submit" value="Сохранить изменения">
+        <a  style='display:block; margin: 1% 0;' href = 'products.php'>Перейти к списку товаров</a>  
+        </form> 
         <hr>
 </body>
 </html
